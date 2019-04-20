@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+vector<vector<pair<int,int>>>v(100005);
+int cost[100005],parent[100005],visited[100005],total;
+#define ff first
+#define ss second
+int Prim(int source)
+{
+    for(int i=0;i<100005;i++)cost[i]=1e7;
+    set<pair<int,int>>s;
+    s.insert(make_pair(0,source));
+    cost[source]=0;
+    while(!s.empty())
+    {
+        auto node=*(s.begin());
+        total+=node.first;
+        visited[node.second]=1;
+        s.erase(node);
+        for(auto i:v[node.second])
+        {
+            if(visited[i.first])continue;
+            if(cost[i.first]>i.second)
+            {
+                s.erase({cost[i.first],i.first});
+                cost[i.first]=i.second;
+                s.insert(make_pair(i.second,i.first));
+
+            }
+
+        }
+
+    }
+return total;
+
+}
+int main()
+{
+ int n,m;
+ cin>>n>>m;
+
+ for(int i=0;i<m;i++)
+ {
+     int from,to,cost1;
+     cin>>from>>to>>cost1;
+     v[from].push_back(make_pair(to,cost1));
+     v[to].push_back(make_pair(from,cost1));
+ }
+cout<<Prim(1);
+    return 0;
+}
