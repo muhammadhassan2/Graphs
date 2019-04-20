@@ -21,14 +21,16 @@ void BFS(int x,int y)
           int newx=node.first+dx[i];
           int newy=node.second+dy[i];
           if(newx>n||newx<0||newy>m||newy<0)continue;
+          if(cost[newx][newy]==-1){
           cost[newx][newy]=cost[node.first][node.second]+1;
           q.push(make_pair(newx,newy));
+          }
       }
 }
 }
 int main()
 {
-
+memset(cost,-1,sizeof cost);
     cin>>n>>m;
     for(int i=0;i<n;i++)
     {
@@ -38,5 +40,6 @@ int main()
         }
     }
     BFS(0,0);
+
     return 0;
 }
