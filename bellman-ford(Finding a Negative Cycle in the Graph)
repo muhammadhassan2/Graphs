@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+const ll inf=1e18;
+vector<vector<pair<ll,ll>>>v(100);
+ll cost[100],n,m;
+void bellman()
+{
+    fill(cost,cost+100,inf);
+    cost[0]=0;
+    for(int i=0;i<=n;i++)// 
+    {
+        for(int j=0;j<v.size();j++)
+        {
+            if(v[j].size()){
+            for(auto k:v[j])
+            {
+                if(cost[j]<inf)
+                {
+                 int d=cost[k.first];
+                    cost[k.first]=min(cost[k.first],cost[j]+k.second);
+            if(d!=cost[k.first]&&i==n)
+            {
+                cout<<"Negative Cycle Found"<<endl;
+            }
+                }
+            }
+            }
+        }
+    }
+    cout<<cost[3];
+
+}
+int main()
+{
+
+cin>>n>>m;
+for(int i=0;i<m;i++)
+{
+    int a,b,c;
+    cin>>a>>b>>c;
+    v[a].push_back(make_pair(b,c));
+}
+bellman();
+    return 0;
+}
