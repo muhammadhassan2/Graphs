@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+vector<vector<int>>edge;
+int cost[505][505],parent[100005],n,m;
+bool visited[100005];
+int arr[505][505];
+int dx[4]={-1, 1, 0, 0};
+int dy[4]={0, 0, 1, -1};
+void BFS(int x,int y)
+{
+  queue<pair<int,int>>q;
+  q.push(make_pair(x,y));
+  cost[x][y]=0;
+  while(!q.empty())
+  {
+      auto node =q.front();
+      q.pop();
+      for(int i=0;i<4;i++)
+      {
+          int newx=node.first+dx[i];
+          int newy=node.second+dy[i];
+          if(newx>n||newx<0||newy>m||newy<0)continue;
+          cost[newx][newy]=cost[node.first][node.second]+1;
+          q.push(make_pair(newx,newy));
+      }
+}
+}
+int main()
+{
+
+    cin>>n>>m;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            cin>>arr[i][j];
+        }
+    }
+    BFS(0,0);
+    return 0;
+}
