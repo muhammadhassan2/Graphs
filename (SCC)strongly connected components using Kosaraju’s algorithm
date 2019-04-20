@@ -1,0 +1,65 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+vector<vector<int>>v(10001),vv(10001);
+vector<int>v1,v2;
+int vis[10001],vis2[10001];
+void dfs(int n)
+{
+    vis[n]=1;
+    for(auto i:v[n])
+    {
+        if(!vis[i])
+        {
+            dfs(i);
+        }
+    }
+    v1.push_back(n);
+}
+void dfs2(int n)
+{
+   vis2[n]=1;
+   v2.push_back(n);
+    for(auto i:vv[n])
+    {
+        if(!vis2[i])
+        {
+            dfs2(i);
+        }
+    }
+}
+int main() {
+    int n,m;
+   cin>>n>>m;
+    for(int i=0;i<m;i++)
+    {
+        int a,b;
+        cin>>a>>b;
+      v[a].push_back(b);
+      vv[b].push_back(a);
+    }
+    int c=0;
+
+    for(int i=1;i<=n;i++)
+    {
+        if(!vis[i])
+        {
+            dfs(i);
+        }
+    }
+    reverse(v1.begin(),v1.end());
+
+    for(int i=0;i<v1.size();i++)
+    {
+       if(!vis2[v1[i]])
+       {
+      
+            dfs2(v1[i]);
+            for(auto i:v2)cout<<i<<" ";
+            cout<<endl;
+     
+            v2.clear();
+        }
+    }
+    return 0;
+}
