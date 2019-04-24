@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int n,m,vis[100005],col[100005],f[100005];
+vector<vector<int>>v(100005);
+vector<int>a1,a2;
+bool p;
+void dfs(int vx,int co)
+{
+    vis[vx]=1;
+    col[vx]=co;
+    if(co==1)a1.push_back(vx);
+    else a2.push_back(vx);
+    for(auto i:v[vx])
+    {
+        if(!vis[i])
+        {
+            dfs(i,abs(co-3));
+        }
+        else if(col[i]==col[vx])
+            p=1;
+
+    }
+
+
+}
+int main()
+{
+  cin>>n>>m;
+  for(int i=0;i<m;i++)
+  {
+      int a,b;
+      cin>>a>>b;
+      f[a]=f[b]=1;
+      v[a].push_back(b);
+      v[b].push_back(a);
+  }
+  for(int i=1;i<=n;i++)
+  {
+      if(!vis[i]&&f[i])dfs(i,1);
+  }
+  if(p)return cout<<-1,0;
+  else
+  {
+      cout<<a1.size()<<endl;
+      for(auto i:a1)cout<<i<<" ";
+      cout<<endl;
+      cout<<a2.size()<<endl;
+      for(auto i:a2)cout<<i<<" ";
+  }
+
+    return 0;
+}
