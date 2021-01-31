@@ -32,7 +32,19 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+/*
+6 9
+1 2 7
+1 3 9
+1 6 14
+2 3 10
+2 4 15
+3 6 2
+6 5 9
+5 4 6
+3 4 11
 
+*/
     cin>>n>>m;
     for(int i=0;i<m;i++)
     {
